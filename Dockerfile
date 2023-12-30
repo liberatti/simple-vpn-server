@@ -3,7 +3,8 @@ FROM rockylinux:8 as main
 ENV EASYRSA_VERSION 3.1.7
 
 RUN dnf -y install epel-release \
- && dnf -y install git wget openvpn kmod iptables
+ && dnf -y install git wget openvpn kmod iptables \
+ && dnf clean all
 
 RUN wget https://github.com/OpenVPN/easy-rsa/releases/download/v$EASYRSA_VERSION/EasyRSA-$EASYRSA_VERSION.tgz \
  && mkdir -p /opt/easy-rsa/ \
