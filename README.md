@@ -1,6 +1,6 @@
 # Simple VPN server
 
-It's a full network tunneling VPN software solution that integrates OpenVPN server capabilities, enterprise management capabilities, simplified OpenVPN Connect UI, and OpenVPN Client software.
+It's a full network tunneling VPN software solution that integrates OpenVPN server capabilities and enterprise management capabilities.
 
 ## Host Configuration
 Before diving into the container setup, ensure the following configurations on your host machine:
