@@ -67,6 +67,6 @@ EOL
     echo 'net.ipv4.ip_forward=1' > /etc/sysctl.d/99-openvpn-forward.conf
 fi
 
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -t nat -A POSTROUTING -o ! lo -j MASQUERADE
 cd /etc/openvpn/server/
 openvpn --config /etc/openvpn/server/server.conf
