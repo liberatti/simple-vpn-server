@@ -30,8 +30,8 @@ create_pki(){
 if [[ ! -e /etc/openvpn/server/server.conf ]]; then
     mkdir -p /etc/openvpn/server/
     create_pki
-    # Create server File
     cat >/etc/openvpn/server/server.conf <<EOL
+    ifconfig-pool-persist /etc/openvpn/ipp.txt 
     port 1194
     proto tcp
     dev tun
@@ -51,7 +51,6 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
     verb 3
     crl-verify $PKI/crl.pem
 EOL
-    # Create client File
     cat >/etc/openvpn/server/client-common.ovpn <<EOL
 client
 dev tun

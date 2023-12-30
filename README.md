@@ -49,6 +49,14 @@ Depending on the container network, it may also be necessary to add a route mapp
 route 172.17.0.0 255.255.255.0
 ```
 
+## Revoke client configuration
+
+The container has a utility to revoke client certificates.
+
+```
+docker exec -it openvpn-server /revoke-client.sh client01
+```
+
 ## License Terms
 
 This product utilizes OpenVPN, an open-source software application that provides a secure, point-to-point or site-to-site connection in a routed or bridged configuration. OpenVPN is developed and maintained by the OpenVPN Project.

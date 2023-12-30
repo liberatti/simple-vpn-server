@@ -2,7 +2,7 @@ name: Main Docker
 on:
   push:
     branches:
-      - main
+      - develop
 
 jobs:
   push_to_registry:
