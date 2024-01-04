@@ -30,8 +30,8 @@ create_pki(){
 if [[ ! -e /etc/openvpn/server/server.conf ]]; then
     mkdir -p /etc/openvpn/server/
     create_pki
-    # Create server File
     cat >/etc/openvpn/server/server.conf <<EOL
+    ifconfig-pool-persist /etc/openvpn/ipp.txt 
     port 1194
     proto tcp
     dev tun
@@ -51,7 +51,6 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
     verb 3
     crl-verify $PKI/crl.pem
 EOL
-    # Create client File
     cat >/etc/openvpn/server/client-common.ovpn <<EOL
 client
 dev tun
@@ -68,6 +67,6 @@ EOL
     echo 'net.ipv4.ip_forward=1' > /etc/sysctl.d/99-openvpn-forward.conf
 fi
 
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -t nat -A POSTROUTING -o ! lo -j MASQUERADE
 cd /etc/openvpn/server/
 openvpn --config /etc/openvpn/server/server.conf
