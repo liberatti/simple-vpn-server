@@ -66,7 +66,14 @@ verb 3
 EOL
     echo 'net.ipv4.ip_forward=1' > /etc/sysctl.d/99-openvpn-forward.conf
 fi
+iptables -t nat -N VPN_DNAT
+iptables -t nat -I POSTROUTING -o tun0 -j MASQUERADE
+iptables -t nat -I PREROUTING -j VPN_DNAT
 
-iptables -t nat -A POSTROUTING -o ! lo -j MASQUERADE
+if [[ -e /firewall/dnat ]];then
+    while read -r rule; do
+        iptables -t nat -A VPN_DNAT $rule
+    done < /firewall/dnat
+fi
 cd /etc/openvpn/server/
 openvpn --config /etc/openvpn/server/server.conf
